@@ -1,4 +1,4 @@
-#include "list.h"
+#include "List.h"
 #include <stdlib.h>
 //#include "Star.h"
 #include "Planet.h"
