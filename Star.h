@@ -19,6 +19,19 @@ class Starvector{
         	unsigned int getCurrentNumPlanets(){}
 };
 
+class Starlist {
+	private:
+		Node *head, *tail;
+	public:
+		Starlist();
+		~StarList();
+		long addPlanet();
+		bool removePlanet(int);
+		Planet * getPlanet(int);
+		void orbit();
+		void printStarInfo();
+		unsigned int getCurrentNumPlanets();
+};
 
 
 #endif

@@ -1,4 +1,4 @@
-CFLAGS= -Wall -Wextra -DDEBUG -g -std=c++14
+makCFLAGS= -Wall -Wextra -DDEBUG -g -std=c++14
 
 all: program1.o Star.o Planet.o Vector.o List.o
 	g++ $(CFLAGS) program1.o Star.o Planet.o -o program4

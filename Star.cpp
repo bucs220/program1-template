@@ -98,3 +98,35 @@ void Starvector::printStarInfo(){
 	}
 }
 #endif
+
+Starlist::Starlist() {
+	
+}
+
+Starlist::~Starlist() {
+	
+}
+
+long Starlist::addPlanet(){
+	
+}
+
+bool Starlist::removePlanet(int id) {
+	
+}
+
+Planet * Starlist::getPlanet(int id) {
+	
+}
+
+void Starlist::orbit() {
+	
+}
+
+void Starlist::printStarInfo() {
+	
+}
+
+unsigned int Starlist::getCurrentNumPlanets() {
+	
+}
