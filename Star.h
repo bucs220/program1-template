@@ -26,7 +26,7 @@ class Starlist {
 		Node *head, *tail;
 	public:
 		Starlist();
-		~StarList();
+		~Starlist();
 		long addPlanet();
 		bool removePlanet(int);
 		Planet * getPlanet(int);
