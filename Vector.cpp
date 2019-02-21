@@ -4,7 +4,7 @@
 #include <iostream>
 
 Vector::Vector(){
-	size = 0;
+	vec_size = 0;
 	vec_planets = NULL;
 }
 
@@ -16,20 +16,20 @@ Vector::~Vector(){
 }
 
 void Vector::insert(int index, Planet* new_planet){
-	if(size < index){
+	if(vec_size < index){
 		Planet ** temp_vec = new Planets*[index+1];
-		for(int i = 0; i < size; i++)
+		for(int i = 0; i < vec_size; i++)
 			temp_vec[i] = vec_planets[i];
 		
 		temp_vec[index] = new_planet;
-		size = index + 1;	
+		vec_size = index + 1;	
 	}
 	else{
-		Planet ** temp_vec = new Planets*[size+1];
-		for(int i = 0; i < size; i++)
+		Planet ** temp_vec = new Planets*[vec_size+1];
+		for(int i = 0; i < vec_size; i++)
 			temp_vec[i] = vec_planets[i];
 		temp_vec[index] = new_planet;
-		size = size +1;
+		vec_size = vec_size +1;
 	}
 	
 	delete [] vec_planets;
@@ -37,7 +37,7 @@ void Vector::insert(int index, Planet* new_planet){
 }
 
 Planet * Vector::read(int index){
-	if(index > size)
+	if(index > vec_size)
 		return NULL;
 
 	else
@@ -46,12 +46,12 @@ Planet * Vector::read(int index){
 }
 
 bool Vector::remove(int index){
-	if(index < size){
+	if(index < vec_size){
 		Planet *temp_planet;
 		temp_planet = vec_planets[index];
-		Planet ** temp_vec = new Planet*[size-1];
+		Planet ** temp_vec = new Planet*[vec_size-1];
 		int j = 0;
-		for(int i = 0; i < size; i++){
+		for(int i = 0; i < vec_size; i++){
 			if(index != i){
 				temp_vec[j] = vec_planets[i]; 
 				j++;		
@@ -59,7 +59,7 @@ bool Vector::remove(int index){
 		}
 	delete temp_planet;
 
-	size = size - 1;	
+	vec_size = vec_size - 1;	
 
 	delete [] vec_planets;
 	vec_planets = temp_vec;
@@ -70,8 +70,10 @@ bool Vector::remove(int index){
 	return false;
 }
 
-unsigned Vector::size(){
+#if 0
+unsigned int Vector::size(){
 	return this->size;
 
 }
+#endif
 
