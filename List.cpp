@@ -1,6 +1,6 @@
 #include "List.h"
 #include <stdlib.h>
-//#include "Star.h"
+#include "Star.h"
 #include "Planet.h"
 #include <iostream>
 #include <ctime> 

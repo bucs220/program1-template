@@ -1,6 +1,6 @@
 #ifndef LIST_H
 #define LIST_H
-//#include "Planet.h"
+#include "Planet.h"
 
 class Node {
 	public:

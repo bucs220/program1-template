@@ -9,7 +9,7 @@ Vector::Vector(){
 }
 
 Vector::~Vector(){
-	for(int i = 0; i< current_planets; i++)
+	for(int i = 0; i< vec_size; i++)
 		delete vec_planets[i];
 
 	delete [] vec_planets;
@@ -17,23 +17,25 @@ Vector::~Vector(){
 
 void Vector::insert(int index, Planet* new_planet){
 	if(vec_size < index){
-		Planet ** temp_vec = new Planets*[index+1];
+		Planet ** temp_vec = new Planet*[index+1];
 		for(int i = 0; i < vec_size; i++)
 			temp_vec[i] = vec_planets[i];
 		
 		temp_vec[index] = new_planet;
-		vec_size = index + 1;	
+		vec_size = index + 1;
+		delete [] vec_planets;
+		vec_planets = temp_vec;	
 	}
 	else{
-		Planet ** temp_vec = new Planets*[vec_size+1];
+		Planet ** temp_vec = new Planet*[vec_size+1];
 		for(int i = 0; i < vec_size; i++)
 			temp_vec[i] = vec_planets[i];
 		temp_vec[index] = new_planet;
 		vec_size = vec_size +1;
+		delete [] vec_planets;
+		vec_planets = temp_vec;	
 	}
 	
-	delete [] vec_planets;
-	vec_planets = temp_vec;	
 }
 
 Planet * Vector::read(int index){

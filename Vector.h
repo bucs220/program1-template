@@ -8,6 +8,7 @@ class Vector{
 		int vec_size;
 	public:
 		Planet ** vec_planets;
+		Vector();
 		~Vector();
 		void insert(int, Planet*);
 		Planet * read(int);

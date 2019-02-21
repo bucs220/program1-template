@@ -1,5 +1,7 @@
 #include "Star.h"
 #include "Planet.h"
+#include "List.h"
+#include "Vector.h"
 #include <iostream>
 
 Starvector::Starvector(){
@@ -16,12 +18,13 @@ Starvector::~Starvector(){
 }
 
 long int Starvector::addPlanet(){
-	Vector<Planet> ** tem_planets = new Vector*[current_planets+1];
+	int rand_dis = rand() % 3000;
+	Planet** tem_planets = new Planet*[current_planets+1];
 	for(int i = 0; i < current_planets; i++){
 		tem_planets[i] = planets[i];
 	}
 
-	Planet * new_planet = new Planet();
+	Planet *new_planet = new Planet(rand_dis);
 	tem_planets[current_planets] = new_planet;
 	current_planets = current_planets + 1;	
 
@@ -81,7 +84,7 @@ Planet* Starvector::getPlanet(int id){
 #endif
 
 #if 1
-void Star::orbit(){
+void Starvector::orbit(){
 	for(int i = 0; i <current_planets; i++)
 		planets[i]->orbit();
 }
