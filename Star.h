@@ -1,6 +1,7 @@
 #ifndef HEADER_BR
 #define HEADER_BR
 #include "Planet.h"
+#include "List.h"
 
 class Starvector{
 	private:
@@ -18,6 +19,7 @@ class Starvector{
         	void printStarInfo();
         	unsigned int getCurrentNumPlanets(){return this->current_planets;}
 };
+
 
 class Starlist {
 	private:

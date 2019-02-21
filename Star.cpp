@@ -100,7 +100,8 @@ void Starvector::printStarInfo(){
 #endif
 
 Starlist::Starlist() {
-	
+	Node *head = NULL;
+	Node *tail = NULL;
 }
 
 Starlist::~Starlist() {
