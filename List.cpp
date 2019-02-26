@@ -12,8 +12,21 @@ List::List() {
 }
 
 List::~List() {
-	delete head;
-	head = NULL;
+	Node * temp = tail;
+	while(temp ->previous != head){
+			tail = tail -> previous;
+			tail -> next = NULL;
+			delete temp -> list_planet;
+			delete temp;
+			temp = tail;
+		}
+
+		delete head ->list_planet;
+		delete tail -> list_planet;
+		delete head;
+		delete tail;
+		head = NULL;
+		tail = NULL;
 }
 
 void List::insert(int index, Planet * new_planet) {
@@ -118,6 +131,7 @@ bool List::remove(int index) {
 		if(index == 0){
 			head = head ->next;
 			head -> previous = NULL;
+			delete temp -> list_planet;
 			delete temp;
 			temp = head;
 			return true;
@@ -130,7 +144,9 @@ bool List::remove(int index) {
 			if (temp_index == index){
 				temp -> previous -> next = temp -> next;
 				temp -> next -> previous = temp -> previous;
+				delete temp -> list_planet;
 				delete temp;
+				temp = NULL;
 				return true;
 			}
 		}
