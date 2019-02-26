@@ -24,14 +24,14 @@ long int Starvector::addPlanet(){
 		tem_planets[i] = planets[i];
 	}
 
-	Planet *new_planet = new Planet(rand_dis);
+	Planet * new_planet = new Planet(rand_dis);
 	tem_planets[current_planets] = new_planet;
 	current_planets = current_planets + 1;	
 
 	delete [] planets;
 	planets = tem_planets;
 
-	return new_planet->getID();
+	return (unsigned)new_planet->getID();
 }
 
 #if 1
@@ -103,8 +103,8 @@ void Starvector::printStarInfo(){
 #endif
 
 Starlist::Starlist() {
-	Node *head = NULL;
-	Node *tail = NULL;
+	head = NULL;
+	tail = NULL;
 }
 
 Starlist::~Starlist() {

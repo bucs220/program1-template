@@ -10,7 +10,7 @@ class Planet{
 	public:
 		Planet(int);
         	int orbit();
-		long int getID(){return this->id;}
+		long int getID(){return (unsigned)id;}
         	int getDistance(){return this->distance;}
         	int getPos(){return this->position;}
 		char getType(){return this->type;}

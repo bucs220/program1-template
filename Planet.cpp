@@ -8,7 +8,7 @@ Planet::Planet(int distance){
 	int rand_pos = rand() % 360;
 	int rand_num = rand() % 3;
 
-	this->id = (long)this;
+	id = (long)this;
 	this->distance = distance;
     	this->position = rand_pos;
 

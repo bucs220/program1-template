@@ -7,8 +7,8 @@
 #include <cstdlib>
 
 List::List() {
-	Node *head = NULL;
-	Node *tail = NULL;
+	head = NULL;
+	tail = NULL;
 }
 
 List::~List() {
@@ -16,25 +16,52 @@ List::~List() {
 	head = NULL;
 }
 
-void List::insert(int index, Planet *p) {
-	
-	Node *temp = head;
+void List::insert(int index, Planet * new_planet) {
+	Node * temp = head;
+	Node * input_node = new Node(new_planet);
 	int temp_index = 0;
+
+	if(index == 0){
+		head = input_node;
+		tail = head;
+		return;
+	}
 	
-	if (size() <= index) {
+	if (size() > index){
+		for(int i = 0; i < index; i++){
+			temp_index++;
+			temp->next->previous = temp;
+			temp = temp->next;
+
+			if (temp_index == index) {
+				input_node->previous = temp;
+				input_node->next = temp->next;
+				temp->next = input_node;
+			}
+			tail = temp -> next;
+		}	
+	}
+	else{
+		input_node -> previous = tail;
+		tail -> next = input_node;
+		tail = input_node;
+	}	
+
+	#if 0
+	if (list_size <= index) {
 		while(temp->next != NULL) {
 			temp_index++;
 			temp->next->previous = temp;
 			temp = temp->next;
-			
-			if (temp_index == index) {
-				temp->p = p;
-				temp->next->previous = temp;
-				temp = temp->next;
-				break;
-			}
 		}
-	} else {
+
+		if (temp_index == index) {
+			temp -> list_planet = new_planet;
+			temp->next->previous = temp;
+			temp = temp->next;
+		}
+	} 
+	else {
 		while(temp->next != NULL) {
 			temp_index++;
 			temp->next->previous = temp;
@@ -43,42 +70,74 @@ void List::insert(int index, Planet *p) {
 			if (temp->next == NULL) {
 				temp->next->previous = temp;
 				temp = temp->next;
-				temp->p = p;
+				temp-> list_planet = new_planet;
 				break;
 			}
 		}
 	}
 	
-	head = temp;
+	//head = temp;
+	#endif
 }
 
-Planet* List::read(int index) {
+Planet * List::read(int index) {
 	
-	if(head == NULL) {
+	if(head == NULL) 
 		return NULL;
-	}
 	
-	Node *temp = head;
+	Node * temp = head;
 	int temp_index = 0;
-	
-	while(temp->next != NULL) {
+
+	if(index > size())
+		return NULL;
+
+	else{
+		if(index == 0)
+			return temp->list_planet;
+
+		while(temp->next != NULL) {
 		temp_index++;
 		temp = temp->next;
 		
-		if (temp_index == index) {
-			return temp->p;
+		if (temp_index == index) 
+			return temp-> list_planet;
 		}
-	}
-	
+	}	
 	return NULL;
 }
 
 bool List::remove(int index) {
 	
-	Node *temp = head;
+	Node * temp = head;
 	int temp_index = 0;
 	
-	if (size() <= index) {
+	if (size() < index) 	
+		return false;
+
+	else{
+		if(index == 0){
+			head = head ->next;
+			head -> previous = NULL;
+			delete temp;
+			temp = head;
+			return true;
+		}
+
+		while(temp != NULL) {
+			temp_index++;
+			temp = temp->next;
+		
+			if (temp_index == index){
+				temp -> previous -> next = temp -> next;
+				temp -> next -> previous = temp -> previous;
+				delete temp;
+				return true;
+			}
+		}
+	}
+
+		#if 0
+
 		while(temp->next != NULL) {
 			temp_index++;
 			temp->next->previous = temp;
@@ -93,19 +152,19 @@ bool List::remove(int index) {
 			}
 			
 		}
-	} else {
-		return false;
-	}
+		#endif
+	return false;
 }
 
 unsigned List::size() {
-
-	Node *temp = head;
-	unsigned temp_index = 0;
+	Node * temp = head;
+	int temp_index = 0;
 	
-	while(temp->next != NULL) {
+	if(head == NULL)
+		return 0;
+		
+	while(temp != NULL) {
 		temp_index++;
-		temp->next->previous = temp;
 		temp = temp->next;	
 	}
 	

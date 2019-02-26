@@ -1,7 +1,8 @@
-#ifndef HEADER_BR
-#define HEADER_BR
+#ifndef HEADER_RGBR
+#define HEADER_RGBR
 #include "Planet.h"
 #include "List.h"
+#include <iostream>
 
 class Starvector{
 	private:
@@ -23,7 +24,7 @@ class Starvector{
 
 class Starlist {
 	private:
-		Node *head, *tail;
+		Node * head, * tail;
 	public:
 		Starlist();
 		~Starlist();
