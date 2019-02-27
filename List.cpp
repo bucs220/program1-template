@@ -1,10 +1,8 @@
 #include "List.h"
-#include <stdlib.h>
 #include "Star.h"
 #include "Planet.h"
 #include <iostream>
-#include <ctime> 
-#include <cstdlib>
+
 
 List::List() {
 	head = NULL;
@@ -13,22 +11,18 @@ List::List() {
 
 List::~List() {
 	Node * temp = tail;
-	while(temp ->previous != head){
-			tail = tail -> previous;
-			tail -> next = NULL;
-			delete temp -> list_planet;
-			delete temp;
-			temp = tail;
-		}
+	while(temp != head){
+		tail = tail -> previous;
+		tail -> next = NULL;
+		delete temp -> list_planet;
+		delete temp;
+		temp = tail;
+	}
 
-		delete head ->list_planet;
-		delete tail -> list_planet;
-		head ->list_planet = NULL;
-		tail -> list_planet = NULL;
-		delete head;
-		delete tail;
-		head = NULL;
-		tail = NULL;
+	delete head ->list_planet;
+	head ->list_planet = NULL;
+	delete head;
+	head = NULL;
 }
 
 void List::insert(int index, Planet * new_planet) {
@@ -60,13 +54,11 @@ void List::insert(int index, Planet * new_planet) {
 				input_node->next = temp->next;
 				temp->next = input_node;
 			}
-			tail = temp -> previous;
-			delete temp -> list_planet;
-			temp -> list_planet = NULL;
-			delete temp;
-			temp = NULL;
-			
-		}	
+		}
+		tail = temp -> previous;
+		//delete temp -> list_planet;
+		//temp -> list_planet = NULL;
+		//delete temp;
 	}
 	else{
 		input_node -> previous = tail;
