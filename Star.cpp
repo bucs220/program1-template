@@ -25,17 +25,17 @@ long int Starvector::addPlanet(){
 	}
 
 	Planet * new_planet = new Planet(rand_dis);
-	tem_planets[current_planets] = new_planet;
-	current_planets = current_planets + 1;	
+	tem_planets[current_planets] = new_planet;	
 
 	delete [] planets;
 	planets = tem_planets;
+	current_planets = current_planets + 1;
 
 	return (unsigned)new_planet->getID();
 }
 
 #if 1
-bool Starvector::findPlanet(int id){
+bool Starvector::findPlanet(long id){
 	for(int i = 0; i <current_planets; i++){
 		if(planets[i]->getID() == id)
 			return true;
@@ -45,7 +45,7 @@ bool Starvector::findPlanet(int id){
 #endif
 
 #if 1
-bool Starvector::removePlanet(int id){
+bool Starvector::removePlanet(long id){
 	if(findPlanet(id)){
 		Planet *temp_planet; 
 		int j = 0;			
@@ -62,6 +62,9 @@ bool Starvector::removePlanet(int id){
 
 	current_planets = current_planets - 1;	
 
+	//for(int i = 0; i< current_planets; i++)
+		//delete planets[i];
+
 	delete [] planets;
 	planets = tem_planets;
 	
@@ -73,7 +76,7 @@ bool Starvector::removePlanet(int id){
 #endif
 
 #if 1
-Planet* Starvector::getPlanet(int id){
+Planet* Starvector::getPlanet(long id){
 	for(int i = 0; i < current_planets; i++){
 		if(planets[i]->getID() == id)
 			return planets[i];
@@ -115,11 +118,11 @@ long Starlist::addPlanet(){
 	
 }
 
-bool Starlist::removePlanet(int id) {
+bool Starlist::removePlanet(long id) {
 	
 }
 
-Planet * Starlist::getPlanet(int id) {
+Planet * Starlist::getPlanet(long id) {
 	
 }
 

@@ -13,6 +13,7 @@ Vector::~Vector(){
 		delete vec_planets[i];
 
 	delete [] vec_planets;
+	vec_planets = NULL;
 }
 
 void Vector::insert(int index, Planet * new_planet){
@@ -25,9 +26,11 @@ void Vector::insert(int index, Planet * new_planet){
 		}
 		
 		temp_vec[index] = new_planet;
-		vec_size = index + 1;
+
 		delete [] vec_planets;
-		vec_planets = temp_vec;	
+		vec_planets = NULL;
+		vec_planets = temp_vec;
+		vec_size = index + 1;	
 	}
 	else{
 		Planet ** temp_vec = new Planet*[vec_size+1];
@@ -35,9 +38,11 @@ void Vector::insert(int index, Planet * new_planet){
 			temp_vec[i] = vec_planets[i];
 		temp_vec[index] = new_planet;
 		temp_vec[vec_size] = new Planet(0);
-		vec_size = vec_size +1;
+
 		delete [] vec_planets;
+		vec_planets = NULL;
 		vec_planets = temp_vec;	
+		vec_size = vec_size +1;
 	}	
 }
 
@@ -63,23 +68,16 @@ bool Vector::remove(int index){
 				j++;		
 			}
 		}
-	delete temp_planet;
-
-	vec_size = vec_size - 1;	
+	delete temp_planet;	
 
 	delete [] vec_planets;
+	vec_planets = NULL;
 	vec_planets = temp_vec;
+	vec_size = vec_size - 1;
 	
 	return true;
 	}
 
 	return false;
 }
-
-#if 0
-unsigned int Vector::size(){
-	return this->size;
-
-}
-#endif
 

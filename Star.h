@@ -12,9 +12,9 @@ class Starvector{
         	Starvector();
 		~Starvector();
         	long addPlanet();
-		bool removePlanet(int);
-		bool findPlanet(int);
-		Planet * getPlanet(int);
+		bool removePlanet(long);
+		bool findPlanet(long);
+		Planet * getPlanet(long);
        		Planet getFurthest();
         	void orbit();
         	void printStarInfo();
@@ -29,8 +29,8 @@ class Starlist {
 		Starlist();
 		~Starlist();
 		long addPlanet();
-		bool removePlanet(int);
-		Planet * getPlanet(int);
+		bool removePlanet(long);
+		Planet * getPlanet(long);
 		void orbit();
 		void printStarInfo();
 		unsigned int getCurrentNumPlanets();
