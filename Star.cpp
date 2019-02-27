@@ -93,15 +93,15 @@ Starlist::~Starlist() {
 	while(temp ->previous != head){
 		tail = tail -> previous;
 		tail -> next = NULL;
-		delete temp -> list_planet;
+		delete temp -> list_star;
 		delete temp;
 		temp = tail;
 	}
 
-	delete head ->list_planet;
-	delete tail -> list_planet;
-	head ->list_planet = NULL;
-	tail -> list_planet = NULL;
+	delete head ->list_star;
+	delete tail -> list_star;
+	head ->list_star = NULL;
+	tail -> list_star = NULL;
 	delete head;
 	delete tail;
 	head = NULL;
@@ -109,42 +109,50 @@ Starlist::~Starlist() {
 }
 
 long Starlist::addPlanet(){
-	
+
 	int rand_dis = rand() % 3000;
-	
-	Node * temp = head;
-	//Planet * temp_planets = new Planet * list_planet;
-	
-	while(temp->next != NULL){
-		temp = temp->next;
-	}
-
 	Planet * new_planet = new Planet(rand_dis);
-	temp->list_planet = new_planet;	
-
-	//delete [] list_planet;
-	//list_planet = temp_planets;
+	list_star -> insert(current_planets, new_planet);
 	current_planets = current_planets + 1;
 	
-	tail = temp;
+	//temp->list_planet = new_planet;	
+	
+	//tail = temp;
 
 	return (unsigned)new_planet->getID();
 	
 }
 
 bool Starlist::removePlanet(long id) {
+
+/*
+	if(findPlanet(id)){
+		int find_index;
+		for(int i = 0; i <current_planets; i++){
+			Planet * temp_planet = vec_star->read(i);
+			if(temp_planet->getID() == id)
+				find_index = i;
+		}
+		current_planets = current_planets - 1;
+		if(vec_star->remove(find_index))
+			return true;		
+	}
+	return false;
+*/
 	
 	Node * temp = head;
-	if(temp->list_planet->getID() == id) {
-		delete temp->list_planet;
-		temp->list_planet = NULL;
+	if(temp->list_star->getID() == id) {
+		delete temp->list_star->read(id);
+		temp->list_star->read(id) = NULL;
+		current_planets--;
 		return true;
 	}
 	while(temp->next != NULL){
 		temp = temp->next;
-		if(temp->list_planet->getID() == id) {
-			delete temp->list_planet;
-			temp->list_planet = NULL;
+		if(temp->list_star->getID() == id) {
+			delete temp->list_star->read(id);
+			temp->list_star->read(id) = NULL;
+			current_planets--;
 			return true;
 		}
 	}
@@ -153,14 +161,15 @@ bool Starlist::removePlanet(long id) {
 }
 
 Planet * Starlist::getPlanet(long id) {
+
 	Node * temp = head;
-	if(temp->list_planet->getID() == id) {
-		return temp->list_planet;
+	if(temp->list_star->getID() == id) {
+		return temp->list_star->read(id);
 	}
 	while(temp->next != NULL){
 		temp = temp->next;
-		if(temp->list_planet->getID() == id) {
-			return temp->list_planet;
+		if(temp->list_star>getID() == id) {
+			return temp->list_star->read(id);
 		}
 	}
 	return NULL;
@@ -169,7 +178,8 @@ Planet * Starlist::getPlanet(long id) {
 void Starlist::orbit() {
 	Node * temp = head;	
 	while(temp != NULL) {
-		temp->list_planet->orbit();
+		long id = temp->list_star->getID();
+		temp->list_star->read(id)->orbit();
 		temp = temp->next;
 	}
 }
@@ -182,7 +192,8 @@ void Starlist::printStarInfo() {
 	std::cout << "Planets: " << std::endl;
 
 	while(temp != NULL) {	
-		std::cout << "Planet " << temp->list_planet->getType() << temp->list_planet->getID() << " is " <<  temp->list_planet->getDistance() << " million miles away at positon " << temp->list_planet->getPos() << " around the star." << std::endl;
+		long id = temp->list_star->getID();
+		std::cout << "Planet " << temp->list_star->read(id)->getType() << temp->list_star->read(id)->getID() << " is " <<  temp->list_star->read(id)->getDistance() << " million miles away at positon " << temp->list_star->read(id)->getPos() << " around the star." << std::endl;
 		temp = temp->next;
 	}
 }

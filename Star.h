@@ -22,14 +22,25 @@ class Starvector{
         	unsigned int getCurrentNumPlanets(){return this->current_planets;}
 };
 
+/*
+class Node {
+	public:
+		Star * list_star;
+		Starnode * next;
+		Starnode * previous;
+		Node (Star * temp_star){list_star = temp_star; next = NULL; previous = NULL;}
+};
+*/
+
+
 
 class Starlist {
 	private:
 		int current_planets;
 		Node * head, * tail;
-		Planet * list_planet;
 		//Node (Planet * temp_planet){list_planet = temp_planet; next = NULL; previous = NULL;}
 	public:
+		List * list_star;
 		Starlist();
 		~Starlist();
 		long addPlanet();
