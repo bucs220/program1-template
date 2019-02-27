@@ -24,7 +24,10 @@ class Starvector{
 
 class Starlist {
 	private:
+		int current_planets;
 		Node * head, * tail;
+		Planet * list_planet;
+		//Node (Planet * temp_planet){list_planet = temp_planet; next = NULL; previous = NULL;}
 	public:
 		Starlist();
 		~Starlist();

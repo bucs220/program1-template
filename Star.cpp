@@ -112,28 +112,110 @@ Starlist::Starlist() {
 
 Starlist::~Starlist() {
 	
+	Node * temp = tail;
+	while(temp ->previous != head){
+		tail = tail -> previous;
+		tail -> next = NULL;
+		delete temp -> list_planet;
+		delete temp;
+		temp = tail;
+	}
+
+	delete head ->list_planet;
+	delete tail -> list_planet;
+	head ->list_planet = NULL;
+	tail -> list_planet = NULL;
+	delete head;
+	delete tail;
+	head = NULL;
+	tail = NULL;
 }
 
 long Starlist::addPlanet(){
+	
+	int rand_dis = rand() % 3000;
+	
+	Node * temp = head;
+	//Planet * temp_planets = new Planet * list_planet;
+	
+	while(temp->next != NULL){
+		temp = temp->next;
+	}
+
+	Planet * new_planet = new Planet(rand_dis);
+	temp->list_planet = new_planet;	
+
+	//delete [] list_planet;
+	//list_planet = temp_planets;
+	current_planets = current_planets + 1;
+	
+	tail = temp;
+
+	return (unsigned)new_planet->getID();
 	
 }
 
 bool Starlist::removePlanet(long id) {
 	
+	Node * temp = head;
+	if(temp->list_planet->getID() == id) {
+		delete temp->list_planet;
+		temp->list_planet = NULL;
+		return true;
+	}
+	while(temp->next != NULL){
+		temp = temp->next;
+		if(temp->list_planet->getID() == id) {
+			delete temp->list_planet;
+			temp->list_planet = NULL;
+			return true;
+		}
+	}
+	return false;
+	
 }
 
 Planet * Starlist::getPlanet(long id) {
-	
+	Node * temp = head;
+	if(temp->list_planet->getID() == id) {
+		return temp->list_planet;
+	}
+	while(temp->next != NULL){
+		temp = temp->next;
+		if(temp->list_planet->getID() == id) {
+			return temp->list_planet;
+		}
+	}
+	return NULL;
 }
 
 void Starlist::orbit() {
-	
+	Node * temp = head;	
+	while(temp != NULL) {
+		temp->list_planet->orbit();
+		temp = temp->next;
+	}
 }
 
 void Starlist::printStarInfo() {
+	Node * temp = head;
 	
+	std::cout << "The star currently has " << current_planets << " planets." << std::endl;
+
+	std::cout << "Planets: " << std::endl;
+
+	while(temp != NULL) {	
+		std::cout << "Planet " << temp->list_planet->getType() << temp->list_planet->getID() << " is " <<  temp->list_planet->getDistance() << " million miles away at positon " << temp->list_planet->getPos() << " around the star." << std::endl;
+		temp = temp->next;
+	}
 }
 
 unsigned int Starlist::getCurrentNumPlanets() {
-	
+	unsigned int count = 0;
+	Node * temp = head;	
+	while(temp != NULL) {
+		count++;
+		temp = temp->next;
+	}
+	return count;
 }
