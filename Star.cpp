@@ -10,34 +10,15 @@ Starvector::Starvector(){
 }
 
 Starvector::~Starvector(){
-	#if 0
-	for(int i = 0; i< current_planets; i++)
-		delete planets[i];
-
-	delete [] planets;
-	#endif
 	delete vec_star;
 
 }
 
-long int Starvector::addPlanet(){
+long Starvector::addPlanet(){
 	int rand_dis = rand() % 3000;
 	Planet * new_planet = new Planet(rand_dis);
-	vec_star -> insert(current_planets, new_Planet);
+	vec_star -> insert(current_planets, new_planet);
 	current_planets = current_planets + 1;
-
-	#if 0
-	Planet** tem_planets = new Planet*[current_planets+1];
-	for(int i = 0; i < current_planets; i++){
-		tem_planets[i] = planets[i];
-	}
-
-	
-	tem_planets[current_planets] = new_planet;	
-
-	delete [] planets;
-	planets = tem_planets;	
-	#endif
 
 	return (unsigned)new_planet->getID();
 }
@@ -53,7 +34,6 @@ bool Starvector::findPlanet(long id){
 }
 #endif
 
-#if 1
 bool Starvector::removePlanet(long id){
 	if(findPlanet(id)){
 		int find_index;
@@ -62,34 +42,12 @@ bool Starvector::removePlanet(long id){
 			if(temp_planet->getID() == id)
 				find_index = i;
 		}
-		if(star_vec->remove(find_index))
-			return true;
-		#if 0
-		Planet * temp_planet; 
-		int j = 0;			
-		Planet ** tem_planets = new Planet*[current_planets-1];
-		for(int i = 0; i < current_planets; i++){
-			if(planets[i]->getID() != id){
-				tem_planets[j] = planets[i];
-				j++;
-			}
-			else
-				temp_planet = planets[i];
-		}
-	delete temp_planet;
-
-	current_planets = current_planets - 1;	
-
-	delete [] planets;
-	planets = tem_planets;
-	
-	#end if	
-		
+		current_planets = current_planets - 1;
+		if(vec_star->remove(find_index))
+			return true;		
 	}
-
 	return false;
 }
-#endif
 
 #if 1
 Planet * Starvector::getPlanet(long id){
@@ -104,9 +62,10 @@ Planet * Starvector::getPlanet(long id){
 
 #if 1
 void Starvector::orbit(){
-	for(int i = 0; i <current_planets; i++)
+	for(int i = 0; i <current_planets; i++){
 		Planet * temp_planet = vec_star->read(i);
 		temp_planet->orbit();
+	}
 }
 #endif
 
@@ -118,7 +77,7 @@ void Starvector::printStarInfo(){
 
 	for(int i = 0; i < current_planets; i++){
 		Planet * temp_planet = vec_star->read(i);	
-	  	std::cout << "Planet " << temp_planet->getType() << temp_planet->getID() << " is " <<  temp_planet->getDistance() << " million miles away at positon " << planets[i]->getPos() << " around the star." << std::endl;
+	  	std::cout << "Planet " << temp_planet->getType() << temp_planet->getID() << " is " <<  temp_planet->getDistance() << " million miles away at positon " << temp_planet->getPos() << " around the star." << std::endl;
 	}
 }
 #endif

@@ -1,7 +1,9 @@
 #ifndef HEADER_RGBR
 #define HEADER_RGBR
+#include "Star.h"
 #include "Planet.h"
 #include "List.h"
+#include "Vector.h"
 #include <iostream>
 
 class Starvector{
@@ -9,14 +11,12 @@ class Starvector{
         	int current_planets;
 	public:
         	Vector * vec_star;
-		//Planet ** planets;
         	Starvector();
 		~Starvector();
         	long addPlanet();
 		bool removePlanet(long);
 		bool findPlanet(long);
 		Planet * getPlanet(long);
-       		Planet getFurthest();
         	void orbit();
         	void printStarInfo();
         	unsigned int getCurrentNumPlanets(){return this->current_planets;}
