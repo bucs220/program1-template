@@ -8,7 +8,8 @@ class Starvector{
 	private:
         	int current_planets;
 	public:
-        	Planet ** planets;
+        	Vector * vec_star;
+		//Planet ** planets;
         	Starvector();
 		~Starvector();
         	long addPlanet();
