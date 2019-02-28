@@ -1,15 +1,15 @@
 #include "List.h"
 #include "Star.h"
 #include "Planet.h"
+#include "List.h"
 #include <iostream>
 
-
-List::List() {
+List::List(){
 	head = NULL;
 	tail = NULL;
 }
 
-List::~List() {
+List::~List(){
 	Node * temp = tail;
 	while(temp != head){
 		tail = tail -> previous;
@@ -55,48 +55,12 @@ void List::insert(int index, Planet * new_planet) {
 				temp->next = input_node;
 			}
 		}
-		tail = temp -> previous;
-		//delete temp -> list_planet;
-		//temp -> list_planet = NULL;
-		//delete temp;
 	}
 	else{
 		input_node -> previous = tail;
 		tail -> next = input_node;
 		tail = input_node;
 	}	
-
-	#if 0
-	if (list_size <= index) {
-		while(temp->next != NULL) {
-			temp_index++;
-			temp->next->previous = temp;
-			temp = temp->next;
-		}
-
-		if (temp_index == index) {
-			temp -> list_planet = new_planet;
-			temp->next->previous = temp;
-			temp = temp->next;
-		}
-	} 
-	else {
-		while(temp->next != NULL) {
-			temp_index++;
-			temp->next->previous = temp;
-			temp = temp->next;
-			
-			if (temp->next == NULL) {
-				temp->next->previous = temp;
-				temp = temp->next;
-				temp-> list_planet = new_planet;
-				break;
-			}
-		}
-	}
-	
-	//head = temp;
-	#endif
 }
 
 Planet * List::read(int index) {
@@ -158,24 +122,6 @@ bool List::remove(int index) {
 			}
 		}
 	}
-
-		#if 0
-
-		while(temp->next != NULL) {
-			temp_index++;
-			temp->next->previous = temp;
-			temp = temp->next;
-			
-			if (temp_index == index) {
-				temp = temp->next;
-				temp = temp->next->previous;
-				
-				head = temp;
-				return true;
-			}
-			
-		}
-		#endif
 	return false;
 }
 
@@ -190,6 +136,5 @@ unsigned List::size() {
 		temp_index++;
 		temp = temp->next;	
 	}
-	
 	return temp_index;
 }
