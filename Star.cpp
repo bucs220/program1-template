@@ -144,3 +144,13 @@ void Starlist::printStarInfo() {
 	  	std::cout << "Planet " << temp_planet->getType() << temp_planet->getID() << " is " <<  temp_planet->getDistance() << " million miles away at positon " << temp_planet->getPos() << " around the star." << std::endl;
 	}
 }
+
+unsigned int Starlist::getCurrentNumPlanets() {
+	/*
+	unsigned int count = 0;
+	while(list_star->read(count) != NULL){
+		list_star = list_star->next;
+		count++;
+	} */
+	return list_star->size();
+}

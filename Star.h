@@ -36,6 +36,6 @@ class Starlist{
 		Planet * getPlanet(long);
 		void orbit();
 		void printStarInfo();
-		unsigned int getCurrentNumPlanets(){return this->current_planets;}
+		unsigned int getCurrentNumPlanets();//{return this->current_planets;}
 };
 #endif
